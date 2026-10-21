@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STRINGHINIFEST | Halloween - 30 Octubre</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pirata+One&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    :root {
+      --bg-dark: #181818;
+      --orange-goth: #d97d48;
+      --text-white: #f5f5f5;
+      --card-bg: rgba(24, 24, 24, 0.88);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 0),
+        radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+      background-size: 24px 24px;
+      background-position: 0 0, 12px 12px;
+      color: var(--text-white);
+      font-family: 'Montserrat', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px 15px;
+      position: relative;
+    }
+
+    .ghost-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .ghost {
+      position: absolute;
+      width: 140px;
+      opacity: 0.85;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,0.7));
+      animation: floatGhost 7s ease-in-out infinite;
+    }
+
+    .ghost-1 { top: -20px; left: 5%; width: 160px; animation-delay: 0s; transform: rotate(15deg); }
+    .ghost-2 { top: 15%; right: -25px; width: 155px; animation-delay: 1.5s; transform: scaleX(-1) rotate(10deg); }
+    .ghost-3 { bottom: 18%; left: -30px; width: 145px; animation-delay: 3s; transform: rotate(-10deg); }
+    .ghost-4 { bottom: -25px; right: 8%; width: 165px; animation-delay: 2s; transform: scaleX(-1) rotate(-15deg); }
+
+    @keyframes floatGhost {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-18px) rotate(4deg); }
+    }
+
+    .invite-card {
+      position: relative;
+      z-index: 2;
+      max-width: 500px;
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 20px;
+      padding: 38px 26px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+      animation: fadeInUp 0.9s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .title-fest {
+      font-size: 2.1rem;
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: -10px;
+    }
+
+    .title-halloween {
+      font-family: 'Pirata One', cursive;
+      font-size: 4.8rem;
+      color: var(--orange-goth);
+      line-height: 1;
+      letter-spacing: 3px;
+      text-shadow: 0 4px 18px rgba(217, 125, 72, 0.25);
+      margin: 4px 0;
+    }
+
+    .title-date {
+      font-family: 'Pirata One', cursive;
+      font-size: 2.8rem;
+      color: var(--orange-goth);
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      letter-spacing: 1.5px;
+      line-height: 1.5;
+      margin-bottom: 22px;
+      font-weight: 400;
+    }
+
+    .info-grid {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: left;
+      margin: 20px auto;
+      padding: 12px 0;
+      max-width: 420px;
+    }
+
+    .info-left {
+      padding-right: 18px;
+      text-align: right;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      line-height: 1.5;
+      min-width: 115px;
+    }
+
+    .info-divider {
+      width: 1.5px;
+      height: 85px;
+      background-color: var(--text-white);
+      opacity: 0.8;
+    }
+
+    .info-right {
+      padding-left: 18px;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      line-height: 1.5;
+    }
+
+    .price-badge {
+      font-size: 1.25rem;
+      letter-spacing: 2px;
+      margin: 18px 0;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    form {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 6px;
+      color: #ccc;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 13px 15px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 10px;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--orange-goth);
+      box-shadow: 0 0 10px rgba(217, 125, 72, 0.35);
+    }
+
+    select option {
+      background: #181818;
+      color: #fff;
+    }
+
+    .transfer-box {
+      display: none;
+      background: rgba(217, 125, 72, 0.12);
+      border: 1px dashed var(--orange-goth);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 18px;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      animation: fadeInUp 0.35s ease;
+    }
+
+    .transfer-box strong {
+      color: var(--orange-goth);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      background: var(--orange-goth);
+      color: #121212;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.25s, box-shadow 0.25s;
+    }
+
+    .btn-submit:hover {
+      background: #e68d58;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(217, 125, 72, 0.4);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    #ticketSection {
+      display: none;
+      margin-top: 25px;
+      padding-top: 25px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      animation: fadeInUp 0.5s ease;
+    }
+
+    .qr-wrapper {
+      background: #fff;
+      padding: 18px;
+      border-radius: 14px;
+      display: inline-block;
+      margin: 15px 0;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    }
+
+    .ticket-id {
+      font-size: 0.8rem;
+      color: #aaa;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .photo-promo {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.72rem;
+      letter-spacing: 0.8px;
+      line-height: 1.5;
+      color: #d0d0d0;
+    }
+
+    .ruiz-logo {
+      margin-top: 10px;
+      font-weight: 700;
+      font-size: 1.35rem;
+      letter-spacing: 1px;
+    }
+    .ruiz-logo span {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fantasmas animados -->
+  <div class="ghost-container">
+    <svg class="ghost ghost-1" viewBox="0 0 200 200" fill="none">
+      <path d="M60 170 C40 140 20 120 30 90 C40 60 65 30 100 30 C135 30 155 60 170 90 C180 120 160 150 140 175 C125 160 115 180 100 175 C85 170 75 185 60 170 Z" fill="#ffffff" stroke="#111" stroke-width="4"/>
+      <ellipse cx="90" cy="65" rx="4" ry="7" fill="#111"/>
+      <ellipse cx="105" cy="65" rx="4" ry="7" fill="#111"/>
+    </svg>
+    <svg class="ghost ghost-2" viewBox="0 0 200 200" fill="none">
+      <path d="M50 180 C30 150 25 110 40 80 C55 50 75 25 105 25 C135 25 150 55 165 85 C180 115 170 155 150 180 C130 165 120 185 100 175 C80 165 65 190 50 180 Z" fill="#ffffff" stroke="#111" stroke-width="4"/>
+      <ellipse cx="95" cy="60" rx="4" ry="7" fill="#111"/>
+      <ellipse cx="110" cy="60" rx="4" ry="7" fill="#111"/>
+    </svg>
+    <svg class="ghost ghost-3" viewBox="0 0 200 200" fill="none">
+      <path d="M55 175 C35 145 20 115 35 85 C50 55 70 30 100 30 C130 30 150 55 165 85 C180 115 165 150 145 175 C125 160 115 180 95 175 C75 170 70 185 55 175 Z" fill="#ffffff" stroke="#111" stroke-width="4"/>
+      <ellipse cx="90" cy="62" rx="4" ry="7" fill="#111"/>
+      <ellipse cx="105" cy="62" rx="4" ry="7" fill="#111"/>
+    </svg>
+    <svg class="ghost ghost-4" viewBox="0 0 200 200" fill="none">
+      <path d="M60 170 C40 140 20 120 30 90 C40 60 65 30 100 30 C135 30 155 60 170 90 C180 120 160 150 140 175 C125 160 115 180 100 175 C85 170 75 185 60 170 Z" fill="#ffffff" stroke="#111" stroke-width="4"/>
+      <ellipse cx="90" cy="65" rx="4" ry="7" fill="#111"/>
+      <ellipse cx="105" cy="65" rx="4" ry="7" fill="#111"/>
+    </svg>
+  </div>
+
+  <!-- Invitación y Registro -->
+  <div class="invite-card">
+    <h1 class="title-fest">STRINGHINIFEST</h1>
+    <div class="title-halloween">halloween</div>
+    <div class="title-date">30 octubre</div>
+
+    <p class="subtitle">¡LLEVA TU MEJOR DISFRAZ Y<br>DIVIÉRTETE!</p>
+
+    <div class="info-grid">
+      <div class="info-left">
+        ENTRADA:<br>4:00 PM
+      </div>
+      <div class="info-divider"></div>
+      <div class="info-right">
+        CASA SAOS<br>
+        ENCINOS 69, PASEO DE<br>
+        XHOSDA, 76805 SAN<br>
+        JUAN DEL RÍO, QRO.
+      </div>
+    </div>
+
+    <div class="price-badge">ENTRADA: $80 MXN</div>
+
+    <form id="registroForm">
+      <div class="form-group">
+        <label for="nombre">Nombre completo</label>
+        <input type="text" id="nombre" placeholder="Ej. Max Stringhini" required />
+      </div>
+
+      <div class="form-group">
+        <label for="telefono">Teléfono (WhatsApp)</label>
+        <input type="tel" id="telefono" placeholder="10 dígitos (Ej. 4271234567)" pattern="[0-9]{10}" required />
+      </div>
+
+      <div class="form-group">
+        <label for="metodoPago">Método de Pago ($80 MXN)</label>
+        <select id="metodoPago" required>
+          <option value="" disabled selected>Selecciona cómo pagarás...</option>
+          <option value="Efectivo">Efectivo (Pago en la entrada)</option>
+          <option value="Transferencia">Transferencia Bancaria</option>
+        </select>
+      </div>
+
+      <!-- ESPACIO PARA TUS DATOS DE TRANSFERENCIA -->
+      <div id="datosTransferencia" class="transfer-box">
+        <strong>👻 DATOS PARA TRANSFERENCIA ($80 MXN):</strong><br>
+        • <b>Banco:</b> [PON AQUÍ TU BANCO]<br>
+        • <b>Beneficiario:</b> Maximiliano Stringhini Ponce<br>
+        • <b>CLABE / Tarjeta:</b> <span style="user-select: all; font-weight:600;">0000 0000 0000 0000 00</span><br>
+        • <b>Concepto:</b> Tu Nombre + StringhiniFest<br>
+        <small style="color: #ccc;">*Muestra tu comprobante al llegar cuando escaneemos tu QR.</small>
+      </div>
+
+      <button type="submit" class="btn-submit" id="btnSubmit">Generar mi Acceso QR</button>
+    </form>
+
+    <!-- Sección del Boleto QR -->
+    <div id="ticketSection">
+      <h3 style="color: var(--orange-goth); margin-bottom: 6px;">¡REGISTRO EXITOSO!</h3>
+      <p style="font-size: 0.85rem; margin-bottom: 10px;">Toma captura de pantalla de tu código QR. Lo necesitarás para entrar a la fiesta:</p>
+      <div class="qr-wrapper">
+        <div id="qrcode"></div>
+      </div>
+      <div class="ticket-id" id="ticketInfoText"></div>
+    </div>
+
+    <div class="photo-promo">
+      ¿DESEAS GUARDAR UN RECUERDO DE TU DISFRAZ?<br>
+      HAY SESIÓN DE FOTOS PROFESIONALES CON RUIZ VISUALS!!<br>
+      COTIZA VÍA IG: @RUIZVISUALS38
+      <div class="ruiz-logo">
+        Ruiz 📷<span>VISUALS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase Configurado con tus credenciales -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+    import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDdTZvEVW7TGOSqdtOug3go2EdZUETKpis",
+      authDomain: "stringhinifesthalloween.firebaseapp.com",
+      databaseURL: "https://stringhinifesthalloween-default-rtdb.firebaseio.com",
+      projectId: "stringhinifesthalloween",
+      storageBucket: "stringhinifesthalloween.firebasestorage.app",
+      messagingSenderId: "623192376195",
+      appId: "1:623192376195:web:b7f434c1db57728e552cb6",
+      measurementId: "G-RRBF8TLK21"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getDatabase(app);
+
+    const metodoPagoSelect = document.getElementById("metodoPago");
+    const datosTransferencia = document.getElementById("datosTransferencia");
+    const registroForm = document.getElementById("registroForm");
+    const ticketSection = document.getElementById("ticketSection");
+    const qrcodeContainer = document.getElementById("qrcode");
+    const ticketInfoText = document.getElementById("ticketInfoText");
+    const btnSubmit = document.getElementById("btnSubmit");
+
+    metodoPagoSelect.addEventListener("change", () => {
+      if (metodoPagoSelect.value === "Transferencia") {
+        datosTransferencia.style.display = "block";
+      } else {
+        datosTransferencia.style.display = "none";
+      }
+    });
+
+    registroForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      btnSubmit.disabled = true;
+      btnSubmit.textContent = "Registrando...";
+
+      const nombre = document.getElementById("nombre").value.trim();
+      const telefono = document.getElementById("telefono").value.trim();
+      const metodoPago = metodoPagoSelect.value;
+
+      try {
+        const invitadosRef = ref(db, "invitados_halloween");
+        const nuevoInvitadoRef = push(invitadosRef);
+        const ticketId = nuevoInvitadoRef.key;
+
+        await set(nuevoInvitadoRef, {
+          id: ticketId,
+          nombre: nombre,
+          telefono: telefono,
+          metodoPago: metodoPago,
+          monto: 80,
+          pagado: false,
+          asistio: false,
+          fechaRegistro: new Date().toLocaleString("es-MX")
+        });
+
+        registroForm.style.display = "none";
+        ticketSection.style.display = "block";
+        qrcodeContainer.innerHTML = "";
+
+        new QRCode(qrcodeContainer, {
+          text: ticketId,
+          width: 200,
+          height: 200,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.H
+        });
+
+        ticketInfoText.innerHTML = `
+          <strong>Invitado:</strong> ${nombre}<br>
+          <strong>Pago:</strong> ${metodoPago} ($80 MXN)<br>
+          <strong>Folio:</strong> ${ticketId}
+        `;
+      } catch (error) {
+        alert("Error al guardar tu registro. Asegúrate de que las Reglas (Rules) en Realtime Database estén en true.");
+        console.error(error);
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = "Generar mi Acceso QR";
+      }
+    });
+  </script>
+</body>
+</html>
